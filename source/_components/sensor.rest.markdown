@@ -43,7 +43,7 @@ resource:
   type: string
   default: string
 method:
-  description: The method of the request.
+  description: The method of the request. Either `POST` or `GET`.
   required: false
   type: string
   default: GET
@@ -52,6 +52,12 @@ name:
   required: false
   type: string
   default: REST Sensor
+device_class:
+  description: >
+    The [type/class](/components/sensor/) of
+    the sensor to set the icon in the frontend.
+  required: false
+  type: string
 value_template:
   description: "Defines a [template](/docs/configuration/templating/#processing-incoming-data) to extract the value."
   required: false
@@ -109,7 +115,7 @@ $ curl -X GET http://192.168.1.31/temperature/
 
 ## {% linkable_title Examples %}
 
-In this section you find some real life examples of how to use this sensor.
+In this section you find some real-life examples of how to use this sensor.
 
 ### {% linkable_title External IP address %}
 

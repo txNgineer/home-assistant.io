@@ -40,11 +40,14 @@ show_state:
   description: Show entity state-text.
   type: boolean
   default: "true"
-column_width:
+theme:
   required: false
-  description: "Column width as CSS length like `100px` or `calc(100% / 7)`. This controls how many entities appear in a row - at the default 20% you have 5 entities in a row. Use `calc(100% / 7)` for 7 entities in a row, and so on."
+  description: "Set to any theme within `themes.yaml`"
   type: string
-  default: 20%
+columns:
+  required: false
+  description: Number of columns to show. If not specified the number will be set automatically.
+  type: integer
 {% endconfiguration %}
 
 ## {% linkable_title Options For Entities %}
@@ -66,18 +69,54 @@ icon:
   type: string
 tap_action:
   required: false
-  description: "Set to `toggle` or `call-service` for direct actions."
-  type: string
-  default: more-info
-service:
-  required: false
-  description: "For `call-service`, e.g. `media_player.media_play_pause`"
-  type: string
-service_data:
-  required: false
-  description: The service data to use.
+  description: Action to take on tap
   type: object
-  default: "entity_id: entity_id"
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
+hold_action:
+  required: false
+  description: Action to take on tap-and-hold
+  type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
 {% endconfiguration %}
 
 ## {% linkable_title Examples %}
@@ -116,4 +155,7 @@ Define entities as objects and apply a custom name:
     - light.ceiling_lights
     - switch.ac
     - lock.kitchen_door
+    - entity: switch.wall_plug_switch
+      tap_action:
+        action: toggle
 ```

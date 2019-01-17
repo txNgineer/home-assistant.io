@@ -10,7 +10,7 @@ footer: true
 redirect_from: /getting-started/automation-trigger/
 ---
 
-Triggers are what starts the processing of an automation rule. It is possible to specify multiple triggers for the same rule. Once a trigger starts, Home Assistant will validate the conditions, if any, and call the action.
+Triggers are what starts the processing of an automation rule. It is possible to specify multiple triggers for the same rule - when _any_ of the triggers becomes true then the automation will start. Once a trigger starts, Home Assistant will validate the conditions, if any, and call the action.
 
 ### {% linkable_title Event trigger %}
 
@@ -125,7 +125,7 @@ automation:
     offset: '-00:45:00'
 ```
 
-Sometimes you may want more granular control over an automation based on the elevation of the sun. This can be used to layer automations to occur as the sun lowers on the horizon or even after it is below the horizon. This is also useful when the "sunset" event is not dark enough outside and you would like the automation to run later at a precise solar angle instead of the time offset such as turning on exterior lighting. 
+Sometimes you may want more granular control over an automation based on the elevation of the sun. This can be used to layer automations to occur as the sun lowers on the horizon or even after it is below the horizon. This is also useful when the "sunset" event is not dark enough outside and you would like the automation to run later at a precise solar angle instead of the time offset such as turning on exterior lighting.
 
 {% raw %}
 ```yaml
@@ -165,33 +165,53 @@ Rendering templates with time (`now()`) is dangerous as trigger templates only u
 
 ### {% linkable_title Time trigger %}
 
-Time can be triggered in many ways. The most common is to specify `at` and trigger at a specific point in time each day. Alternatively, you can also match if the hour, minute or second of the current time has a specific value. You can prefix the value with a `/` to match whenever the value is divisible by that number. You cannot use `at` together with hour, minute or second.
+The time trigger is configured to run once at a specific point in time each day.
 
 ```yaml
 automation:
   trigger:
     platform: time
+    # Military time format. This trigger will fire at 3:32 PM
+    at: '15:32:00'
+```
+
+### {% linkable_title Time pattern trigger %}
+
+With the time pattern trigger, you can match if the hour, minute or second of the current time matches a specific value. You can prefix the value with a `/` to match whenever the value is divisible by that number. You can specify `*` to match any value.
+
+```yaml
+automation:
+  trigger:
+    platform: time_pattern
     # Matches every hour at 5 minutes past whole
     minutes: 5
-    seconds: 00
 
 automation 2:
   trigger:
-    platform: time
-    # When 'at' is used, you cannot also match on hour, minute, seconds.
-    # Military time format.
-    at: '15:32:00'
+    platform: time_pattern
+    # Trigger once per minute during the hour of 3
+    hours: '3'
+    minutes: '*'
 
 automation 3:
   trigger:
-    platform: time
+    platform: time_pattern
     # You can also match on interval. This will match every 5 minutes
     minutes: '/5'
-    seconds: 00
 ```
-<p class='note warning'>
-  Remember that if you are using matching to include both `minutes` and `seconds`.  Without `seconds`, your automation will trigger 60 times during the matching minute. 
-</p>
+
+### {% linkable_title Webhook trigger %}
+
+Webhook triggers are triggered by web requests made to the webhook endpoint: `/api/webhook/<webhook_id>`. This endpoint does not require authentication besides knowing the webhook id. You can either send encoded form or JSON data, available in the template as either `trigger.json` or `trigger.data`.
+
+```yaml
+automation:
+  trigger:
+    platform: webhook
+    webhook_id: some_hook_id
+```
+
+You could test triggering above automation by sending a POST HTTP request to `http://your-home-assistant:8123/api/webhook/some_hook_id`.
 
 ### {% linkable_title Zone trigger %}
 
@@ -203,6 +223,21 @@ automation:
     platform: zone
     entity_id: device_tracker.paulus
     zone: zone.home
+    # Event is either enter or leave
+    event: enter  # or "leave"
+```
+
+### {% linkable_title Geolocation trigger %}
+
+Geolocation triggers can trigger when an entity is appearing in or disappearing from a zone. Entities that are created by a [Geolocation](/components/geo_location/) platform support reporting GPS coordinates.
+Because entities are generated and removed by these platforms automatically, the entity id normally cannot be predicted. Instead, this trigger requires the definition of a `source` which is directly linked to one of the Geolocation platforms.
+
+```yaml
+automation:
+  trigger:
+    platform: geo_location
+    source: nsw_rural_fire_service_feed
+    zone: zone.bushfire_alert_zone
     # Event is either enter or leave
     event: enter  # or "leave"
 ```

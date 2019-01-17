@@ -2,7 +2,7 @@
 layout: page
 title: "Picture Elements Card"
 sidebar_label: Picture Elements
-description: "Picture elements card is one of the most versatile type of cards"
+description: "Picture elements card is one of the most versatile types of cards"
 date: 2018-07-01 10:28 +00:00
 sidebar: true
 comments: false
@@ -10,9 +10,9 @@ sharing: true
 footer: true
 ---
 
-Picture elements card is one of the most versatile type of cards.
+Picture elements card is one of the most versatile types of cards.
 
-The cards allows you to position icons or text and even services! On an image based on coordinates. Imagine floor plan, imagine [picture-glance](/lovelace/picture-glance/) with no restrictions!
+The cards allow you to position icons or text and even services! On an image based on coordinates. Imagine floor plan, imagine [picture-glance](/lovelace/picture-glance/) with no restrictions!
 
 <p class='img'>
   <img src='/images/lovelace/lovelace_picture_elements.gif' alt='A functional floorplan powered by picture elements'>
@@ -71,21 +71,54 @@ entity:
   type: string
 tap_action:
   required: false
-  description: more-info, toggle, navigate, call-service
-  type: string
-  default: more-info
-navigation_path:
-  required: false
-  description: Url path to navigate to (e.g. `/lovelace/1`)
-  type: string
-service:
-  required: false
-  description: "Service to call (e.g. `light.turn_on`)"
-  type: string
-service_data:
-  required: false
-  description: The service data to use.
+  description: Action to take on tap
   type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
+hold_action:
+  required: false
+  description: Action to take on tap-and-hold
+  type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
 style:
   required: true
   description: Position and style the element using CSS.
@@ -114,21 +147,54 @@ suffix:
   type: string
 tap_action:
   required: false
-  description: more-info, toggle, navigate, call-service
-  type: string
-  default: more-info
-navigation_path:
-  required: false
-  description: Url path to navigate to (e.g. `/lovelace/1`)
-  type: string
-service:
-  required: false
-  description: "Service to call (e.g. `light.turn_on`)"
-  type: string
-service_data:
-  required: false
-  description: The service data to use.
+  description: Action to take on tap
   type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
+hold_action:
+  required: false
+  description: Action to take on tap-and-hold
+  type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
 style:
   required: true
   description: Position and style the element using CSS.
@@ -171,7 +237,7 @@ type:
   type: string
 icon:
   required: true
-  description: Icon to display (e.g. `mdi:home`)
+  description: "Icon to display (e.g., `mdi:home`)"
   type: string
 title:
   required: false
@@ -183,21 +249,54 @@ entity:
   type: string
 tap_action:
   required: false
-  description: more-info, toggle, navigate, call-service
-  type: string
-  default: more-info
-navigation_path:
-  required: false
-  description: Url path to navigate to (e.g. `/lovelace/1`)
-  type: string
-service:
-  required: false
-  description: "Service to call (e.g. `light.turn_on`)"
-  type: string
-service_data:
-  required: false
-  description: The service data to use.
+  description: Action to take on tap
   type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
+hold_action:
+  required: false
+  description: Action to take on tap-and-hold
+  type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
 style:
   required: true
   description: Position and style the element using CSS.
@@ -218,21 +317,54 @@ entity:
   type: string
 tap_action:
   required: false
-  description: none, more-info, toggle, navigate, call-service
-  type: string
-  default: more-info
-navigation_path:
-  required: false
-  description: Url path to navigate to (e.g. `/lovelace/1`)
-  type: string
-service:
-  required: false
-  description: "Service to call (e.g. `light.turn_on`)"
-  type: string
-service_data:
-  required: false
-  description: The service data to use.
+  description: Action to take on tap
   type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
+hold_action:
+  required: false
+  description: Action to take on tap-and-hold
+  type: object
+  keys:
+    action:
+      required: true
+      description: "Action to perform (`more-info`, `toggle`, `call-service`, `navigate`, `none`)"
+      type: string
+      default: "`more-info`"
+    navigation_path:
+      required: false
+      description: "Path to navigate to (e.g. `/lovelace/0/`) when `action` defined as `navigate`"
+      type: string
+      default: none
+    service:
+      required: false
+      description: "Service to call (e.g. `media_player.media_play_pause`) when `action` defined as `call-service`"
+      type: string
+      default: none
+    service_data:
+      required: false
+      description: "Service data to include (e.g. `entity_id: media_player.bedroom`) when `action` defined as `call-service`"
+      type: string
+      default: none
 image:
   required: false
   description: The image to display.
@@ -265,7 +397,7 @@ style:
 {% configuration %}
 type:
   required: true
-  description: 'Card name with `custom:` prefix (e.g. `custom:my-custom-card`)'
+  description: 'Card name with `custom:` prefix (e.g., `custom:my-custom-card`)'
   type: string
 style:
   required: true
@@ -311,6 +443,21 @@ state_filter:
   "off": brightness(50%) hue-rotate(45deg)
 ```
 
+## {% linkable_title How to use click-and-hold %}
+
+If the option `hold_action` is specified, that action will be performed when the entity is clicked and held for half a second or more.
+
+```yaml
+tap_action:
+  action: toggle
+hold_action:
+  action: call-service
+  service: light.turn_on
+  service_data:
+    entity_id: light.bed_light
+    brightness_pct: 100
+```
+
 ## {% linkable_title Example %}
 
 ```yaml
@@ -318,13 +465,15 @@ state_filter:
   image: /local/floorplan.png
   elements:
     - type: state-icon
-      tap_action: toggle
+      tap_action:
+        action: toggle
       entity: light.ceiling_lights
       style:
         top: 47%
         left: 42%
     - type: state-icon
-      tap_action: toggle
+      tap_action:
+        action: toggle
       entity: light.kitchen_lights
       style:
         top: 30%
@@ -344,8 +493,9 @@ state_filter:
         entity_id: group.all_lights
     - type: icon
       icon: mdi:home
-      tap_action: navigate
-      navigation_path: /lovelace/0
+      tap_action:
+        action: navigate
+        navigation_path: /lovelace/0
       style:
         top: 10%
         left: 10%
@@ -360,7 +510,8 @@ state_filter:
     # state_image & state_filter - toggle on click
     - type: image
       entity: light.living_room
-      tap_action: toggle
+      tap_action:
+        action: toggle
       image: /local/living_room.png
       state_image:
         "off": /local/living_room_off.png
@@ -384,8 +535,11 @@ state_filter:
     # Single image, state_filter - call-service on click
     - type: image
       entity: media_player.living_room
-      tap_action: call-service
-      service: media_player.media_play_pause
+      tap_action:
+        action: call-service
+        service: media_player.media_play_pause
+        service_data:
+          entity_id: media_player.living_room
       image: /local/television.jpg
       filter: brightness(5%)
       state_filter:

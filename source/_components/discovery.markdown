@@ -9,6 +9,7 @@ sharing: true
 footer: true
 logo: home-assistant.png
 ha_category: Other
+ha_qa_scale: internal
 ---
 
 Home Assistant can discover and automatically configure [zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking)/[mDNS](https://en.wikipedia.org/wiki/Multicast_DNS) and [uPnP](https://en.wikipedia.org/wiki/Universal_Plug_and_Play) devices on your network. Currently the `discovery` component can detect:
@@ -58,8 +59,6 @@ discovery:
     - homekit
 ```
 
-{% linkable_title Configuration variables: %}
-
 {% configuration discovery %}
 ignore:
   description: A list of platforms that never will be automatically configured by `discovery`.
@@ -83,9 +82,11 @@ Valid values for ignore are:
  * `frontier_silicon`: Frontier Silicon internet radios
  * `google_cast`: Google Cast
  * `harmony`: Logitech Harmony Hub
+ * `igd`: Internet Gateway Device
  * `ikea_tradfri`: IKEA Trådfri (Tradfri)
  * `logitech_mediaserver`: Logitech media server (Squeezebox)
  * `netgear_router`: Netgear routers
+ * `octoprint`: Octoprint
  * `openhome`: Linn / Openhome
  * `panasonic_viera`: Panasonic Viera
  * `philips_hue`: Philips Hue
@@ -99,7 +100,7 @@ Valid values for ignore are:
  * `tellstick`: Telldus Live
  * `wink`: Wink Hub
  * `yamaha`: Yamaha media player
- * `yeelight`: Yeelight Sunflower bulb
+ * `yeelight`: Yeelight lamps and bulbs (not only Yeelight Sunflower bulb)
  * `xiaomi_gw`: Xiaomi Aqara gateway
 
 Valid values for enable are:
